@@ -13,13 +13,8 @@ class ParcelsController < ApplicationController
 
   # POST /parcels
   def create
-    parcel = Parcel.create(parcel_params)
-
-    if parcel
-      render json: parcel, status: :created
-    else
-      render json: parcel.errors, status: :unprocessable_entity
-    end
+    parcel = Parcel.create!(parcel_params)
+    render json: parcel
   end
 
   # PATCH/PUT /parcels/1
@@ -39,7 +34,7 @@ class ParcelsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   # Only allow a list of trusted parameters through.
   def parcel_params
-    params.require(:parcel).permit(:recipient_name, :recipient_contact, :weight, :from, :destination, :order_status,
-                                   :distance)
+    params.permit(:recipient_name, :recipient_contact, :weight, :from, :destination, :order_status,
+                  :distance, :user_id)
   end
 end
