@@ -1,5 +1,5 @@
 class ParcelsController < ApplicationController
-  before_action :authentication
+  
 
   # GET /parcels
   def index
