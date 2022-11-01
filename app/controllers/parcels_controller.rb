@@ -1,5 +1,5 @@
 class ParcelsController < ApplicationController
-  before_action :set_parcel, only: %i[show update destroy]
+  #before_action :authentication
 
   # GET /parcels
   def index
@@ -8,7 +8,8 @@ class ParcelsController < ApplicationController
 
   # GET /parcels/1
   def show
-    render json: @parcel
+    parcel = Parcel.find(params[:id])
+    render json: parcel
   end
 
   # POST /parcels
@@ -19,9 +20,9 @@ class ParcelsController < ApplicationController
 
   # PATCH/PUT /parcels/1
   def update
-    dog = Parcel.find(params[:id])
-    dog.update_attributes(parcel_params)
-    render json: dog
+    parcel = Parcel.find(params[:id])
+    parcel.update_attributes(parcel_params)
+    render json: parcel
   end
 
   # DELETE /parcels/1
