@@ -1,11 +1,9 @@
 class ParcelsController < ApplicationController
-  before_action :set_parcel, only: %i[ show update destroy ]
+  before_action :set_parcel, only: %i[show update destroy]
 
   # GET /parcels
   def index
-    @parcels = Parcel.all
-
-    render json: @parcels
+    render json: Parcel.all
   end
 
   # GET /parcels/1
@@ -15,37 +13,33 @@ class ParcelsController < ApplicationController
 
   # POST /parcels
   def create
-    @parcel = Parcel.new(parcel_params)
+    parcel = Parcel.create(parcel_params)
 
-    if @parcel.save
-      render json: @parcel, status: :created, location: @parcel
+    if parcel
+      render json: parcel, status: :created
     else
-      render json: @parcel.errors, status: :unprocessable_entity
+      render json: parcel.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /parcels/1
   def update
-    if @parcel.update(parcel_params)
-      render json: @parcel
-    else
-      render json: @parcel.errors, status: :unprocessable_entity
-    end
+    dog = Parcel.find(params[:id])
+    dog.update_attributes(parcel_params)
+    render json: dog
   end
 
   # DELETE /parcels/1
   def destroy
-    @parcel.destroy
+    Parcel.destroy(params[:id])
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_parcel
-      @parcel = Parcel.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def parcel_params
-      params.require(:parcel).permit(:recipient_name, :recipient_contact, :weight, :from, :destination, :total_cost, :order_status, :distance)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  # Only allow a list of trusted parameters through.
+  def parcel_params
+    params.require(:parcel).permit(:recipient_name, :recipient_contact, :weight, :from, :destination, :order_status,
+                                   :distance)
+  end
 end
