@@ -1,51 +1,41 @@
 class ApplicationController < ActionController::API
-    SECRET = "yoursecretword"
+  before_action :authorized
 
-  def authentication
-    # making a request to a secure route, token must be included in the headers
-    decode_data = decode_user_data(request.headers["token"])
-    # getting user id from a nested JSON in an array.
-    user_data = decode_data[0]["user_id"] unless !decode_data
-    # find a user in the database to be sure token is for a real user
-    user = User.find(user_data&.id)
+  def encode_token(payload)
+    JWT.encode(payload, 's3cr3t')
+  end
 
-    # The barebone of this is to return true or false, as a middleware
-    # its main purpose is to grant access or return an error to the user
+  def auth_header
+    # { Authorization: 'Bearer <token>' }
+    request.headers['Authorization']
+  end
 
-    if user
-      return true
-    else
-      render json: { message: "invalid credentials" }
+  def decoded_token
+    if auth_header
+      token = auth_header.split(' ')[1]
+      # header: { 'Authorization': 'Bearer <token>' }
+      begin
+        JWT.decode(token, 's3cr3t', true, algorithm: 'HS256')
+      rescue JWT::DecodeError
+        nil
+      end
     end
   end
 
-  # turn user data (payload) to an encrypted string  [ A ]
-  def encode_user_data(payload)
-    token = JWT.encode payload, SECRET, "HS256"
-    return token
-  end
-
-  # turn user data (payload) to an encrypted string  [ B ]
-  def encode_user_data(payload)
-    JWT.encode payload, SECRET, "HS256"
-  end
-
-  # decode token and return user info, this returns an array, [payload and algorithms] [ A ]
-  def decode_user_data(token)
-    begin
-      data = JWT.decode token, SECRET, true, { algorithm: "HS256" }
-      return data
-    rescue => e
-      puts e
+  def logged_in_user
+    if decoded_token
+      user_id = decoded_token[0]['user_id']
+      @user = User.find_by(id: user_id)
     end
   end
 
-  # decode token and return user info, this returns an array, [payload and algorithms] [ B ]
-  def decode_user_data(token)
-    begin
-      JWT.decode token, SECRET, true, { algorithm: "HS256" }
-    rescue => e
-      puts e
-    end
+  def logged_in?
+    !!logged_in_user
   end
+
+  def authorized
+    render json: { message: 'Please log in' }, status: :unauthorized unless logged_in?
+  end
+
 end
+
