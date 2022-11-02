@@ -1,9 +1,8 @@
 class ParcelsController < ApplicationController
-  
-
   # GET /parcels
   def index
-    render json: Parcel.all
+    parcels = Parcel.all
+    render json: parcels
   end
 
   # GET /parcels/1
@@ -14,15 +13,22 @@ class ParcelsController < ApplicationController
 
   # POST /parcels
   def create
-    parcel = Parcel.create!(parcel_params)
-    render json: parcel
+    parcel = Parcel.new(parcel_params)
+
+    if parcel.save
+      render json: parcel, status: :created
+    else
+      render json: parcel.errors, status: :unprocessable_entity
+    end
   end
 
   # PATCH/PUT /parcels/1
   def update
-    parcel = Parcel.find(params[:id])
-    parcel.update_attributes(parcel_params)
-    render json: parcel
+    if parcel.update(parcel_params)
+      render json: parcel 
+    else  
+      render json: parcel.errors, status: :unprocessable_entity
+    end
   end
 
   # DELETE /parcels/1
