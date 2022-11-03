@@ -12,7 +12,6 @@ class Ability
       can :manage, :all
     else
       can [:create, :read, :destroy], Parcel, user_id: user.id
-      cannot :
     end
     # Define abilities for the user here. For example:
     #
