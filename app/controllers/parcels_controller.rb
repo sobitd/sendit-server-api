@@ -1,19 +1,24 @@
-class ParcelsController < ApplicationController
+class ParcelsController < ApiController
+  before_action :common_setup, only: %i[show update destroy]
+  before_action :authorized
+  load_and_authorize_resource
+
+
   # GET /parcels
   def index
-    parcels = Parcel.all
-    render json: parcels
+    @parcels = Parcel.where(user_id: @user.id)
+    render json: @parcels
   end
 
   # GET /parcels/1
   def show
-    parcel = Parcel.find(params[:id])
-    render json: parcel
+    render json: @parcel
   end
 
   # POST /parcels
   def create
     parcel = Parcel.new(parcel_params)
+    @parcel.user_id = @user.id
 
     if parcel.save
       render json: parcel, status: :created
@@ -24,21 +29,25 @@ class ParcelsController < ApplicationController
 
   # PATCH/PUT /parcels/1
   def update
-    parcel = Parcel.find_by(id: params[:id])
-    if parcel
-      parcel.update(parcel_params)
-      render json: parcel
+   @parcel = Parcel.find_by(id: params[:id])
+    if @parcel
+    @parcel.update(parcel_params)
+      render json: @parcel
     else
-      render json: parcel.errors, status: :unprocessable_entity
-    end
+      render json: @parcel.errors, status: :unprocessable_entity
+      end
   end
 
   # DELETE /parcels/1
   def destroy
-    Parcel.destroy(params[:id])
+    @parcel.destroy
   end
 
   private
+
+  def common_setup
+    @parcel = Parcel.find(params[:id])
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   # Only allow a list of trusted parameters through.

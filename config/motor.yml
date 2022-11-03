@@ -1,0 +1,56 @@
+---
+engine_version: 0.3.16
+file_version: 2022-11-03 17:10:55.199656000 Z
+resources:
+- name: parcel
+  preferences:
+    columns:
+    - access_type: hidden
+      name: updated_at
+    - access_type: hidden
+      name: created_at
+  updated_at: 2022-11-03 17:03:33.034673000 +00:00
+- name: user
+  preferences:
+    columns:
+    - access_type: hidden
+      name: password_digest
+    - access_type: hidden
+      name: email
+    - access_type: hidden
+      name: encrypted_password
+    - access_type: hidden
+      name: confirmation_token
+    - access_type: hidden
+      name: remember_token
+    - access_type: hidden
+      name: updated_at
+    - access_type: hidden
+      name: created_at
+    - access_type: hidden
+      name: username
+    - access_type: hidden
+      name: isAdmin
+    scopes:
+    - visible: false
+      name: not_admin
+    - visible: false
+      name: not_normal
+  updated_at: 2022-11-03 17:10:55.199656000 +00:00
+configs:
+- key: header.links
+  value:
+  - name: "⭐ Star on GitHub"
+    path: https://github.com/motor-admin/motor-admin-rails
+  updated_at: 2022-11-03 16:48:03.160438000 +00:00
+queries: []
+dashboards: []
+forms: []
+alerts: []
+api_configs:
+- id: 1
+  name: origin
+  url: "/"
+  preferences: {}
+  description: 
+  updated_at: 2022-11-03 16:48:03.198710000 +00:00

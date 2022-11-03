@@ -12,7 +12,7 @@ User.create!(first_name: 'Koni',
              phone_number: '0737423431',
              username: 'apo',
              password_digest: 'boilerplate5554',
-             isAdmin: true)
+             isAdmin: 1)
 
 User.create!(first_name: 'Faka',
              last_name: 'Tobi',
@@ -20,7 +20,7 @@ User.create!(first_name: 'Faka',
              phone_number: '0733466577',
              username: 'redo',
              password_digest: 'boilerplate99944',
-             isAdmin: false)
+             isAdmin: 0)
 
 User.create!(first_name: 'Drey ',
              last_name: 'Mwangi',
@@ -28,7 +28,7 @@ User.create!(first_name: 'Drey ',
              phone_number: '0734662575',
              username: 'preme',
              password_digest: 'boilerplate9933',
-             isAdmin: false)
+             isAdmin: 0)
 
 User.create!(first_name: 'Brian',
              last_name: 'Kimtai',
@@ -36,7 +36,7 @@ User.create!(first_name: 'Brian',
              phone_number: '0721466577',
              username: 'prrred',
              password_digest: 'boilerplatet644',
-             isAdmin: false)
+             isAdmin: 0)
 
 User.create!(first_name: 'Grace',
              last_name: 'Mish',
@@ -44,7 +44,7 @@ User.create!(first_name: 'Grace',
              phone_number: '0712436577',
              username: 'skrrr',
              password_digest: 'boilerplate45944',
-             isAdmin: false)
+             isAdmin: 0)
 
 parcel_one = Parcel.create!(
   recipient_name: 'Laban Kimtai',
