@@ -1,3 +1,4 @@
+
 class UsersController < ApiController
   before_action :authorized, only: [:profile]
 

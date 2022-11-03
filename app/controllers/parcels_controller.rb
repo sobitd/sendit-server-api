@@ -29,11 +29,13 @@ class ParcelsController < ApiController
 
   # PATCH/PUT /parcels/1
   def update
-    if @parcel.update(parcel_params)
+   @parcel = Parcel.find_by(id: params[:id])
+    if @parcel
+    @parcel.update(parcel_params)
       render json: @parcel
     else
       render json: @parcel.errors, status: :unprocessable_entity
-    end
+      end
   end
 
   # DELETE /parcels/1
@@ -50,7 +52,7 @@ class ParcelsController < ApiController
   # Use callbacks to share common setup or constraints between actions.
   # Only allow a list of trusted parameters through.
   def parcel_params
-    params.permit(:recipient_name, :recipient_contact, :weight, :from, :destination, :order_status,
+    params.permit(:recipient_name, :recipient_contact, :weight, :total_cost, :from, :destination, :order_status,
                   :distance, :user_id)
   end
 end
