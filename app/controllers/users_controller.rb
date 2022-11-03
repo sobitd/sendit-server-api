@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorized, only: [:auto_login]
+  before_action :authorized, only: [:profile]
 
   # REGISTER
   def create
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def auto_login
+  def profile
     render json: @user
   end
 
