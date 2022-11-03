@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount Motor::Admin => '/motor_admin'
+  mount Motor::Admin=> '/admin'
 
   resource :users, only: [:create]
   post '/login', to: 'users#login'
