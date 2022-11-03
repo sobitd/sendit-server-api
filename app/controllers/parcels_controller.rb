@@ -1,4 +1,4 @@
-class ParcelsController < ApplicationController
+class ParcelsController < ApiController
   before_action :common_setup, only: %i[show update destroy]
   before_action :authorized
   # GET /parcels
