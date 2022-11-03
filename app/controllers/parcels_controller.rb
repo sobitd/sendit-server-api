@@ -1,4 +1,4 @@
-class ParcelsController < ApplicationController
+class ParcelsController < ApiController
   # GET /parcels
   def index
     parcels = Parcel.all
