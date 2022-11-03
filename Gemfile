@@ -18,7 +18,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 gem 'bcrypt'
 
-gem 'activeadmin'
+
 gem 'sprockets', '<4'
 gem 'sass-rails'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
@@ -28,6 +28,10 @@ gem 'rails_admin'
 gem 'jwt' 
 
 gem 'activestorage'
+
+gem 'devise'
+gem 'activeadmin'
+gem 'inherited_resources'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
@@ -39,5 +43,7 @@ group :development do
 end
 
 gem "sassc-rails"
+
+
 
 gem "motor-admin", "~> 0.3.16"

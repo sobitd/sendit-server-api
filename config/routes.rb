@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+  mount Motor::Admin => '/motor_admin'
+
   resource :users, only: [:create]
   post '/login', to: 'users#login'
   get '/profile', to: 'users#profile'
