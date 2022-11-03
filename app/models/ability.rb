@@ -4,16 +4,16 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-
     # Handle the case where we don't have a current_user i.e. the user is a guest
     user ||= User.new
 
-    if user.isAdmin? 
-      can :manage, :all 
-    else  
-      can :manage, Parcel
+    # Define user abilities here
+    if user.admin?
+      can :manage, :all
+    else
+      can [:create, :read, :destroy], Parcel, user_id: user.id
+      cannot :
     end
-    # Define user abilities here 
     # Define abilities for the user here. For example:
     #
     #   return unless user.present?

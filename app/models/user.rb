@@ -3,7 +3,13 @@ class User < ApplicationRecord
   has_many :parcels
   validates :first_name, :last_name, :email_address, :phone_number, :username, :password_digest, presence: true
 
-  def is_admin? 
-    User.isA 
+  enum isAdmin: %i[normal admin]
+
+  after_initialize do
+    self.isAdmin ||= :normal if new_record?
+  end
+
+  def admin?
+    User.isAdmin = 'admin'
   end
 end
