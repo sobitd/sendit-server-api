@@ -18,6 +18,8 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 gem 'bcrypt'
 
+gem 'notifier'
+gem 'simplecov-erb'
 
 gem 'sprockets', '<4'
 gem 'sass-rails'

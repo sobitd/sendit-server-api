@@ -1,6 +1,6 @@
 ---
 engine_version: 0.3.16
-file_version: 2022-11-03 17:10:55.199656000 Z
+file_version: 2022-11-04 01:04:22.272710000 Z
 resources:
 - name: parcel
   preferences:
@@ -14,29 +14,15 @@ resources:
   preferences:
     columns:
     - access_type: hidden
-      name: password_digest
-    - access_type: hidden
-      name: email
-    - access_type: hidden
-      name: encrypted_password
-    - access_type: hidden
-      name: confirmation_token
-    - access_type: hidden
-      name: remember_token
-    - access_type: hidden
       name: updated_at
     - access_type: hidden
       name: created_at
-    - access_type: hidden
-      name: username
-    - access_type: hidden
-      name: isAdmin
     scopes:
     - visible: false
       name: not_admin
     - visible: false
       name: not_normal
-  updated_at: 2022-11-03 17:10:55.199656000 +00:00
+  updated_at: 2022-11-04 01:04:22.272710000 +00:00
 configs:
 - key: header.links
   value:

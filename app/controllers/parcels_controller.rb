@@ -6,7 +6,7 @@ class ParcelsController < ApiController
 
   # GET /parcels
   def index
-    @parcels = Parcel.where(user_id: @user.id)
+    @parcels = Parcel.all
     render json: @parcels
   end
 
@@ -17,13 +17,15 @@ class ParcelsController < ApiController
 
   # POST /parcels
   def create
-    parcel = Parcel.new(parcel_params)
+    @parcel = Parcel.new(parcel_params)
     @parcel.user_id = @user.id
-
-    if parcel.save
-      render json: parcel, status: :created
+    user = @parcel.user 
+    new_parcel = @parcel 
+    if @parcel.save
+      NotifierMailer.parcel_added(user, new_parcel).deliver_now 
+      render json: @parcel, status: :created
     else
-      render json: parcel.errors, status: :unprocessable_entity
+      render json: @parcel.errors, status: :unprocessable_entity
     end
   end
 

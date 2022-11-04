@@ -5,11 +5,11 @@ class User < ApplicationRecord
 
   enum isAdmin: %i[normal admin]
 
-  after_initialize do
-    self.isAdmin ||= :normal if new_record?
-  end
+  # after_initialize do
+  #   self.isAdmin ||= :normal if new_record?
+  # end
 
-  def admin?
-    User.isAdmin = 'admin'
-  end
+  # def admin?
+  #   User.isAdmin = 'admin'
+  # end
 end
