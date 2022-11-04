@@ -3,7 +3,6 @@ class ParcelsController < ApiController
   before_action :authorized
   load_and_authorize_resource
 
-
   # GET /parcels
   def index
     @parcels = Parcel.all
@@ -19,10 +18,10 @@ class ParcelsController < ApiController
   def create
     @parcel = Parcel.new(parcel_params)
     @parcel.user_id = @user.id
-    user = @parcel.user 
-    new_parcel = @parcel 
+    user = @parcel.user
+    new_parcel = @parcel
     if @parcel.save
-      NotifierMailer.parcel_added(user, new_parcel).deliver_now 
+      NotifierMailer.parcel_added(user, new_parcel).deliver_now
       render json: @parcel, status: :created
     else
       render json: @parcel.errors, status: :unprocessable_entity
@@ -31,13 +30,13 @@ class ParcelsController < ApiController
 
   # PATCH/PUT /parcels/1
   def update
-   @parcel = Parcel.find_by(id: params[:id])
+    @parcel = Parcel.find_by(id: params[:id])
     if @parcel
-    @parcel.update(parcel_params)
+      @parcel.update(parcel_params)
       render json: @parcel
     else
       render json: @parcel.errors, status: :unprocessable_entity
-      end
+    end
   end
 
   # DELETE /parcels/1
